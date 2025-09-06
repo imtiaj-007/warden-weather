@@ -11,7 +11,7 @@ export const PageContainer = ({
     maxW = 'container.xl'
 }: PageContainerProps) => {
     return (
-        <Container maxW={maxW} py={8} px={{ base: 4, md: 8 }}>
+        <Container maxW={maxW} p={4} marginX={'auto'}>
             <Box>{children}</Box>
         </Container>
     );

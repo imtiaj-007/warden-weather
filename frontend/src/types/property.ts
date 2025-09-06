@@ -1,3 +1,5 @@
+import { WeatherData } from "./weather";
+
 export interface PropertyFilters {
     searchText?: string;
     minTemp?: number;
@@ -20,4 +22,5 @@ export interface Property {
     tags?: string[];
     createdAt: string;
     updatedAt: string;
+    weather: WeatherData;
 }

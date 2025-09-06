@@ -7,7 +7,8 @@ import {
 import { ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
 import { Header } from './header';
-import { PageContainer } from './pageContainer';
+import { PageContainer } from './PageContainer';
+
 
 interface AppLayoutProps {
     children: ReactNode;
