@@ -1,93 +1,209 @@
-# 🏠 Weather to Stay or Not
+# Backend – Warden Weather Service
 
-Welcome! This is an evaluation project for Warden.
+Express + Prisma backend that serves properties enriched with current weather and historical weather summaries using Open‑Meteo.
 
-You are provided with a slice of the Warden backend codebase. At present, it contains only one API endpoint, `/get-properties`, which returns the first 20 properties and supports basic text search.
+---
 
-In the file `.env.example` you are given readonly credentials of a live hosted database. This db is already populated with properties data on which this API operates.
+## 🚀 Tech Stack
 
-## Objectives
+* Node.js, Express
+* Prisma (readonly DB)
+* TypeScript
+* Open‑Meteo APIs
+* NodeCache
 
-Your task is to build a single **search page in Next.js** that consumes this API to return accurate results and provides users with both search and filtering capabilities. **Specific Requirement is given below.**
+---
 
-The focus here is **functionality rather than design**. This means the main priority is on backend query optimization (efficiently handling multiple filters, scaling to larger datasets, and returning results quickly) and smooth frontend integration (accurate wiring between filters, search, and API responses). The UI itself can remain minimal: a simple search bar, intuitive filtering inputs, and property cards showing relevant information are more than enough.
+## ✨ Features
 
-## User Requirements
+* `GET /get-properties` with search and weather-based filters
+* Current weather (temperature, humidity, condition)
+* Historical weather summaries (min/max/avg for temp & humidity) over **1m / 3m / 6m / 12m**
+* In-memory caching for current and historical data
+* Historical data persisted in `data/weather.json` for reuse
 
-![It sure is a hot one today](https://arden-public.s3.ap-south-1.amazonaws.com/hotone.jpg)
+---
 
-Our Product team has identified that weather is a critical factor when people choose properties to stay at. In fact, some residents might even reject a job offer if the local weather doesn’t suit them. To address this, we need to enhance the property search experience by adding **live weather-based filters**.
+## ⚙️ Setup
 
-After a 6 hour meeting, following filters and constraints were finalized.
+### 1) Install
 
-| **Filter**             | **Input Type**          | **Allowed Range/Options**                                                                                                                                                                                                                     |
-| ---------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Temperature Range (°C) | Numeric range (min/max) | -20°C to 50°C                                                                                                                                                                                                                                 |
-| Humidity Range (%)     | Numeric range (min/max) | 0% to 100%                                                                                                                                                                                                                                    |
-| Weather Condition      | Dropdown (grouped)      | - **Clear:** 0 (clear sky)<br>- **Cloudy:** 1–3 (partly cloudy to overcast)<br>- **Drizzle:** 51–57 (light to dense drizzle)<br>- **Rainy:** 61–67, 80–82 (rain showers, light to heavy)<br>- **Snow:** 71–77, 85–86 (snowfall, snow showers) |
+```bash
+cd backend
+npm i
+npm run prisma:gen
+```
 
-> **Note:** The numbers listed under "Weather Condition" refer to weather codes as defined by [WMO](https://codes.wmo.int/common/weather-code) (World Meteorological Organization)
+### 2) Environment
 
-## Approach
+Create `.env` (see `.env.example` if available):
 
-1. Use [Open-Meteo](https://open-meteo.com/) to fetch **live weather data** by passing `latitude` and `longitude` from each property. No API key is required.
+```bash
+# Project Settings
+PORT=5000
+DATA_FILE_PATH="../../data/weather.json"
 
-2. You only have **readonly access** to the provided database. If you wish to create migrations or modify the schema, please follow the [migration guide](docs/migrations.md).
+# Open Meteo URLs
+OPENMETEO_URL=https://api.open-meteo.com/v1/forecast
+OPENMETEO_ARCHIVE_URL=https://archive-api.open-meteo.com/v1/archive
 
-## Installation
+# Database
+DATABASE_URL=mysql://candidate_user:StrongPassword!123@arden-dev.c52ea4c0y1ao.ap-south-1.rds.amazonaws.com:3306/warden_test_one?connection_limit=30&pool_timeout=30
+```
 
-1. Clone this repository and move into the folder:
-   ```bash
-   git clone <repo-url>
-   cd warden-test-one
-   ```
-2. Install Dependencies
-   ```bash
-   npm i
-   npm run prisma:gen
-   ```
-3. Copy Environment File
-   ```bash
-   cp .env.example .env
-   ```
-4. Start the development server
-   ```bash
-   npm run dev
-   ```
-   open `http://localhost:5000` you should see "Warden Weather Test: OK"
+### 3) Run
 
-## Technical Expectations
+```bash
+npm run dev
+# http://localhost:5000 → "Warden Weather Test: OK"
+```
 
-1. Use strict types as much as possible.
+---
 
-2. Keep the code modular, resource efficient and fast!
+## 📜 Scripts
 
-3. Keep a good commit history, with small meaningful commits
+* `npm run dev`: Start server with ts-node
+* `npm run build`: Type-check and build
+* `npm run start`: Run compiled JS
+* `npm run prisma:gen`: Generate Prisma client
+* `npm run db:seed`: Seed local DB (if applicable)
 
-## Quality Expectations
+---
 
-Assume that you are already working here, and you are given full responsibilty ownership of this endpoint. Treat this codebase as production!
+## 🌐 API
 
-If you feel that you can enhance this project with any additional filters, better UI elements, or something different altogether! Feel free to run wild.
+### `GET /get-properties`
 
-## Deliverables
+Returns up to 20 properties enriched with weather.
 
-1. A working app with the required changes as per the assignment.
+#### Query params:
 
-2. README.md with setup/run instructions. Include .env.example and a seed step (if any) if you've changed db schema.
+* `searchText`: string (matches name/city/state)
+* `minTemp`, `maxTemp`: number (°C)
+* `minHumidity`, `maxHumidity`: number (%)
+* `conditions`: string|string\[] in \["clear","cloudy","drizzle","rainy","snow"]
+* `historyDuration`: `'1m' | '3m' | '6m' | '12m'` (defaults to `1m`)
 
-3. AI_USAGE.md that lists where you used AI/coding assistants, prompts you asked for substantive code, and how you verified/modified results. AI use is not discouraged, but we want to understand how you structure your prompts.
+#### Example:
 
-4. A 5-10 min video walkthrough via Loom showing the working feature and explaining your approach, a couple of decisions, and at least one scenario where you discovered some critical foresight and changed your approach.
+```bash
+GET /get-properties?searchText=Chennai&minTemp=20&maxHumidity=85&conditions=clear&historyDuration=3m
+```
 
-## Submission
+#### Response (excerpt):
 
-- You have **48 hours** from the time you receive the assignment email to complete and submit your solution.
+```json
+[
+  {
+    "id": 1,
+    "name": "Sample Property",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "country": "India",
+    "lat": 13.03222,
+    "lng": 80.23478,
+    "isActive": true,
+    "weather": {
+      "temperature": 30.2,
+      "humidity": 68,
+      "weatherCode": 1,
+      "condition": "cloudy"
+    },
+    "weatherHistory": {
+      "avgTemp": 29.1,
+      "minTemp": 23.5,
+      "maxTemp": 35.4,
+      "avgHumidity": 70.3,
+      "minHumidity": 52.0,
+      "maxHumidity": 88.0
+    }
+  }
+]
+```
 
-- After making all required changes, **push your code to a public repository**.
+---
 
-- **Share the public repo link** and all deliverables by replying to the assignment email, and **CC hiring@wardenera.com**.
+## 🔄 Data Flow
 
-- Use the subject line: `Weather to Stay or Not | Warden Assignment by {your_name}`.
+### Current weather
 
-Good luck, have fun.
+* `services/weatherService.ts#getWeather` → Open‑Meteo Forecast API (`current=...`)
+* Cached for **5 minutes** via NodeCache
+
+### Historical weather
+
+* `scripts/fetchHistoricalWeather.ts` calls Open‑Meteo Archive API for the last 365 days
+* Aggregates **min/max/avg for temp & humidity** into 1m/3m/6m/12m windows
+* Persists to `data/weather.json`
+* Cached for **1 hour**
+
+### Controller
+
+* `controllers/properties.ts#getProperties`
+* Loads properties via Prisma
+* Enriches each with `getCompleteWeather()` (current + historical by duration)
+* Applies filters (`utils/filterHelpers.ts`)
+
+---
+
+## 📊 Historical Data Script
+
+* Entrypoint: `src/scripts/fetchHistoricalWeather.ts`
+
+### How it works:
+
+1. For curated list of cities, fetch last 365 days from Open‑Meteo Archive
+2. Compute summaries and write to `data/weather.json`
+3. Can run ad‑hoc (`ts-node`)
+
+### API URL structure:
+
+```bash
+https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={lng}&start_date={YYYY-MM-DD}&end_date={YYYY-MM-DD}&daily=temperature_2m_max,temperature_2m_min,relative_humidity_2m_max,relative_humidity_2m_min&timezone=auto
+```
+
+---
+
+## 🌍 CORS
+
+* Allows `http://localhost:3000` by default (frontend dev)
+* Adjust in `src/index.ts` if needed
+
+---
+
+## 📂 Project Structure
+
+```bash
+backend/
+  src/
+    controllers/       # Express controllers
+      properties.ts
+    routes/            # Express routes
+      properties.ts
+    services/          # Weather services (current + historical)
+      weatherService.ts
+    scripts/           # Historical fetching + persistence
+      fetchHistoricalWeather.ts
+    utils/             # Helpers (filters, mapping)
+    types/             # TS types (weather, open-meteo)
+    database/          # Prisma client init
+    index.ts           # App bootstrap
+  data/weather.json    # Persisted historical summaries
+  prisma/              # Schema, migrations, seeds
+```
+
+---
+
+## 📘 Prisma
+
+* Uses **readonly DB** for properties
+* If schema changes are required → see `docs/migrations.md`
+
+---
+
+## 📝 Notes
+
+* No API key required for Open‑Meteo
+* Historical summaries are **precomputed** for performance
+* Filters apply to **current weather** only → historical summaries are returned alongside for UI
+* To extend filter logic with history → adjust `utils/filterHelpers.ts`
