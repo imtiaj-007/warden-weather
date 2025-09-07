@@ -96,7 +96,7 @@ function buildHistoricalUrl(
     end: string,
     params: string[] = []
 ): string {
-    const baseUrl = "https://archive-api.open-meteo.com/v1/archive";
+    const baseUrl = process.env.OPENMETEO_ARCHIVE_URL ?? "https://archive-api.open-meteo.com/v1/archive";
     const requiredParams = [
         `latitude=${lat}`,
         `longitude=${lng}`,
