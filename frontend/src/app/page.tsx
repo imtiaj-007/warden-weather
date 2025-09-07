@@ -8,6 +8,8 @@ import {
 	Skeleton,
 	Text,
 	Alert,
+	Flex,
+	Icon
 } from '@chakra-ui/react';
 import { IoAlert } from 'react-icons/io5';
 import { Filters } from '@/components/properties/Filters';
@@ -15,10 +17,11 @@ import { PageContainer } from '@/components/layout/PageContainer';
 import { PropertyCard } from '@/components/properties/PropertyCard';
 import { useProperties } from '@/hooks/useProperties';
 import { PropertyFilters } from '@/types/property';
+import { FiSearch } from 'react-icons/fi';
 
 
 export default function PropertiesPage() {
-	const [filters, setFilters] = useState<PropertyFilters>({});
+	const [filters, setFilters] = useState<PropertyFilters>({ historyDuration: '1m' });
 	const { data: properties, isLoading, error, isError } = useProperties(filters);
 
 	return (
@@ -73,7 +76,24 @@ export default function PropertiesPage() {
 						</Grid>
 
 						{!isLoading && !isError && properties?.length === 0 && (
-							<Box textAlign="center" py={12}>
+							<Box 
+								textAlign="center" 
+								py={12}
+								borderWidth="1px"
+								borderRadius="lg"
+								borderColor="gray.200"
+								p={6}
+							>
+								<Flex justifyContent="center" mb={4}>
+									<Box 
+										bg="gray.100" 
+										p={3} 
+										borderRadius="full"
+										display="inline-flex"
+									>
+										<Icon as={FiSearch} boxSize={6} color="gray.500" />
+									</Box>
+								</Flex>
 								<Text color="neutral.500" fontSize="lg">
 									No properties found matching your criteria.
 								</Text>

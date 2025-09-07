@@ -1,4 +1,4 @@
-import { WeatherData } from "./weather";
+import { WeatherData, WeatherHistory } from "./weather";
 
 export interface PropertyFilters {
     searchText?: string;
@@ -7,6 +7,7 @@ export interface PropertyFilters {
     minHumidity?: number;
     maxHumidity?: number;
     weatherCondition?: string;
+    historyDuration?: '1m' | '3m' | '6m' | '12m';
 }
 
 export interface Property {
@@ -23,4 +24,5 @@ export interface Property {
     createdAt: string;
     updatedAt: string;
     weather: WeatherData;
+    weatherHistory: WeatherHistory;
 }
