@@ -12,6 +12,22 @@ export interface WeatherData {
     condition: WeatherCondition;
 }
 
+export interface HistoryGroup {
+    avgTemp: number;
+    minTemp: number;
+    maxTemp: number;
+    avgHumidity: number;
+    minHumidity: number;
+    maxHumidity: number;
+}
+
+export interface WeatherHistory {
+    "1m": HistoryGroup;
+    "3m": HistoryGroup;
+    "6m": HistoryGroup;
+    "12m": HistoryGroup;
+}
+
 export interface OpenMeteoResponse {
     current: {
         temperature_2m: number;
@@ -25,4 +41,5 @@ import { Property } from "@prisma/client";
 
 export interface PropertyWithWeather extends Property {
     weather: WeatherData;
+    weatherHistory?: HistoryGroup;
 }

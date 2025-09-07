@@ -9,6 +9,7 @@ import {
     Badge,
     Flex,
     Icon,
+    Table,
 } from '@chakra-ui/react';
 import { WiDaySunny, WiCloudy, WiRain, WiSnow, WiDaySprinkle } from 'react-icons/wi';
 import { FiDroplet, FiThermometer } from 'react-icons/fi';
@@ -79,7 +80,7 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
                     borderRadius="md"
                     alignItems="center"
                 >
-                    <Stack gap={0.5}>                                                
+                    <Stack gap={0.5}>
                         <Flex alignItems="center" gap={2}>
                             <Icon as={WeatherIcon} boxSize={5} color="blue.500" />
                             <Text fontSize="sm" color="neutral.700" textTransform="capitalize">
@@ -129,6 +130,47 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
                             ))}
                         </HStack>
                     )}
+
+                    {property.weatherHistory &&
+                        <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
+                            <Table.Root size="sm" variant="outline" colorScheme="gray">
+                                <Table.Header bg="gray.100">
+                                    <Table.Row>
+                                        <Table.ColumnHeader p={1} fontWeight="semibold" color="gray.700"></Table.ColumnHeader>
+                                        <Table.ColumnHeader p={1} fontWeight="semibold" color="gray.700" textAlign="center">
+                                            <Flex align="center" justify="center" gap={1}>
+                                                <Icon as={FiThermometer} color="red.500" />
+                                                Temperature
+                                            </Flex>
+                                        </Table.ColumnHeader>
+                                        <Table.ColumnHeader p={1} fontWeight="semibold" color="gray.700" textAlign="center">
+                                            <Flex align="center" justify="center" gap={1}>
+                                                <Icon as={FiDroplet} color="blue.500" />
+                                                Humidity
+                                            </Flex>
+                                        </Table.ColumnHeader>
+                                    </Table.Row>
+                                </Table.Header>
+                                <Table.Body>
+                                    <Table.Row>
+                                        <Table.Cell p={1} fontWeight="medium">Min</Table.Cell>
+                                        <Table.Cell p={1} textAlign="center">{property.weatherHistory?.minTemp?.toFixed(1)} °C</Table.Cell>
+                                        <Table.Cell p={1} textAlign="center">{property.weatherHistory?.minHumidity?.toFixed(1)} %</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell p={1} fontWeight="medium">Max</Table.Cell>
+                                        <Table.Cell p={1} textAlign="center">{property.weatherHistory?.maxTemp?.toFixed(1)} °C</Table.Cell>
+                                        <Table.Cell p={1} textAlign="center">{property.weatherHistory?.maxHumidity?.toFixed(1)} %</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell p={1} fontWeight="medium">Avg</Table.Cell>
+                                        <Table.Cell p={1} textAlign="center">{property.weatherHistory?.avgTemp?.toFixed(1)} °C</Table.Cell>
+                                        <Table.Cell p={1} textAlign="center">{property.weatherHistory?.avgHumidity?.toFixed(1)} %</Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+                            </Table.Root>
+                        </Box>
+                    }
 
                     <Text fontSize="xs" fontWeight={500} color="neutral.500">
                         Added: {new Date(property.createdAt).toLocaleDateString()}

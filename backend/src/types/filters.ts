@@ -6,4 +6,5 @@ export interface WeatherFilter {
     minHumidity?: number;
     maxHumidity?: number;
     conditions?: WeatherCondition[]; // ["clear", "cloudy", "drizzle", "rainy", "snow"]
+    historyDuration?: '1m' | '3m' | '6m' | '12m';
 }

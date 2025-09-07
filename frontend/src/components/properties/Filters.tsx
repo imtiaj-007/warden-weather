@@ -13,7 +13,7 @@ import {
     ButtonGroup,
 } from '@chakra-ui/react';
 import { FiFilter } from 'react-icons/fi';
-import { WEATHER_CONDITIONS } from '@/lib/constants';
+import { WEATHER_CONDITIONS, WEATHER_HISTORY_RANGE } from '@/lib/constants';
 import { PropertyFilters } from '@/types/property';
 
 interface FiltersProps {
@@ -40,7 +40,8 @@ export const Filters = ({ filters, onFiltersChange, isLoading }: FiltersProps) =
         onFiltersChange(resetFilters);
     };
 
-    const collection = createListCollection({ items: WEATHER_CONDITIONS });
+    const weatherConditionCollection = createListCollection({ items: WEATHER_CONDITIONS });
+    const weatherHistoryCollection = createListCollection({ items: WEATHER_HISTORY_RANGE });
 
     return (
         <Card.Root bg="white" shadow="sm" borderWidth="1px" borderColor="gray.100" padding={4}>
@@ -65,6 +66,50 @@ export const Filters = ({ filters, onFiltersChange, isLoading }: FiltersProps) =
                             _hover={{ borderColor: 'brand.300' }}
                             _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px var(--chakra-colors-brand-500)' }}
                         />
+                    </Box>
+
+                    {/* Weather History */}
+                    <Box>
+                        <Select.Root
+                            collection={weatherHistoryCollection}
+                            value={localFilters.historyDuration ? [localFilters.historyDuration] : []}
+                            onValueChange={(e) => handleFilterChange('historyDuration', e.value[0])}
+                            size="sm"
+                            width="100%"
+                        >
+                            <Select.HiddenSelect />
+                            <Select.Label>Weather History</Select.Label>
+                            <Select.Control>
+                                <Select.Trigger padding={2}
+                                    _hover={{ borderColor: 'brand.300' }}
+                                    _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px var(--chakra-colors-brand-500)' }}
+                                >
+                                    <Select.ValueText placeholder="Select weather condition" />
+                                </Select.Trigger>
+                                <Select.IndicatorGroup>
+                                    <Select.Indicator
+                                        _hover={{ color: 'brand.500' }}
+                                    />
+                                </Select.IndicatorGroup>
+                            </Select.Control>
+                            <Portal>
+                                <Select.Positioner>
+                                    <Select.Content padding={2}
+                                        _hover={{ borderColor: 'brand.300' }}
+                                    >
+                                        {weatherHistoryCollection.items.map((condition) => (
+                                            <Select.Item item={condition} key={condition.value} marginY={1}
+                                                _hover={{ bg: 'brand.50' }}
+                                                _focus={{ bg: 'brand.100' }}
+                                            >
+                                                {condition.label}
+                                                <Select.ItemIndicator />
+                                            </Select.Item>
+                                        ))}
+                                    </Select.Content>
+                                </Select.Positioner>
+                            </Portal>
+                        </Select.Root>
                     </Box>
 
                     {/* Temperature Range */}
@@ -156,7 +201,7 @@ export const Filters = ({ filters, onFiltersChange, isLoading }: FiltersProps) =
                     {/* Weather Condition */}
                     <Box>
                         <Select.Root
-                            collection={collection}
+                            collection={weatherConditionCollection}
                             value={localFilters.weatherCondition ? [localFilters.weatherCondition] : []}
                             onValueChange={(e) => handleFilterChange('weatherCondition', e.value[0])}
                             size="sm"
@@ -182,7 +227,7 @@ export const Filters = ({ filters, onFiltersChange, isLoading }: FiltersProps) =
                                     <Select.Content padding={2}
                                         _hover={{ borderColor: 'brand.300' }}
                                     >
-                                        {collection.items.map((condition) => (
+                                        {weatherConditionCollection.items.map((condition) => (
                                             <Select.Item item={condition} key={condition.value} marginY={1}
                                                 _hover={{ bg: 'brand.50' }}
                                                 _focus={{ bg: 'brand.100' }}

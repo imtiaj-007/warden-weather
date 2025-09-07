@@ -6,7 +6,6 @@ import {
 } from '@tanstack/react-query'
 import { ReactNode } from 'react';
 import { Box } from '@chakra-ui/react';
-import { Header } from './header';
 import { PageContainer } from './PageContainer';
 
 
@@ -27,7 +26,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
     return (
         <Box minH="100vh" bg="bg" color="fg">
             <QueryClientProvider client={queryClient}>
-                <Header />
                 <PageContainer>
                     {children}
                 </PageContainer>

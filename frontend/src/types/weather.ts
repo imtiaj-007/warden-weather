@@ -11,3 +11,12 @@ export interface WeatherData {
     weatherCode: number;     // raw WMO code
     condition: WeatherCondition;
 }
+
+export interface WeatherHistory {
+    avgTemp: number;
+    minTemp: number;
+    maxTemp: number;
+    avgHumidity: number;
+    minHumidity: number;
+    maxHumidity: number;
+}
