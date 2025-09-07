@@ -1,9 +1,12 @@
 import fetch from "node-fetch";
 import NodeCache from "node-cache";
-import { WeatherData, OpenMeteoResponse } from "../types/weather";
+import { WeatherData, OpenMeteoResponse, WeatherHistory } from "../types/weather";
 import { mapWeatherCode } from "../utils/weatherHelpers";
+import { fetchHistoricalDataByCity } from "../scripts/fetchHistoricalWeather";
 
 const cache = new NodeCache({ stdTTL: 300 }); // 5 min TTL
+const historyCache = new NodeCache({ stdTTL: 3600 }); // 1 hour TTL for historical data
+
 
 function buildOpenMeteoUrl(lat: number, lng: number, params: string[] = []): string {
     const baseUrl = process.env.OPENMETEO_URL ?? "https://api.open-meteo.com/v1/forecast";
@@ -19,7 +22,7 @@ function buildOpenMeteoUrl(lat: number, lng: number, params: string[] = []): str
 }
 
 export async function getWeather(lat: number, lng: number): Promise<WeatherData> {
-    const cacheKey = `${lat},${lng}`;
+    const cacheKey = `${lat}_${lng}`;
     const cached = cache.get<WeatherData>(cacheKey);
     if (cached) return cached;
 
@@ -36,4 +39,44 @@ export async function getWeather(lat: number, lng: number): Promise<WeatherData>
 
     cache.set(cacheKey, weather);
     return weather;
+}
+
+/**
+ * Get historical weather data for last year.
+ * Reads from weather.json if exists, otherwise fetches & saves.
+ */
+export async function getHistoricalWeather(
+    city: string,
+    lat: number,
+    lng: number
+): Promise<WeatherHistory> {
+    const cacheKey = `history_${city}_${lat}_${lng}`;
+    const cached = historyCache.get<WeatherHistory>(cacheKey);
+    if (cached) return cached;
+
+    const data: WeatherHistory = await fetchHistoricalDataByCity(city, lat, lng);
+    historyCache.set(cacheKey, data);
+    return data;
+}
+
+/**
+ * Get comprehensive weather data (current + historical) for a location
+ */
+export async function getCompleteWeather(
+    city: string,
+    lat: number,
+    lng: number
+): Promise<{
+    current: WeatherData;
+    historical: WeatherHistory;
+}> {
+    const [current, historical] = await Promise.all([
+        getWeather(lat, lng),
+        getHistoricalWeather(city, lat, lng)
+    ]);
+
+    return {
+        current,
+        historical
+    };
 }

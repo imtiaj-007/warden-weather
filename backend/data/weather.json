@@ -1,0 +1,392 @@
+{
+    "Chennai": {
+        "city": "Chennai",
+        "lat": 13.03222,
+        "lng": 80.23478,
+        "history": {
+            "1m": {
+                "avgTemp": 29.3625,
+                "minTemp": 23.8,
+                "maxTemp": 37.2,
+                "avgHumidity": 70.76785714285714,
+                "minHumidity": 36,
+                "maxHumidity": 97
+            },
+            "3m": {
+                "avgTemp": 30.61704545454546,
+                "minTemp": 23.8,
+                "maxTemp": 39.9,
+                "avgHumidity": 65.58522727272727,
+                "minHumidity": 27,
+                "maxHumidity": 97
+            },
+            "6m": {
+                "avgTemp": 30.702808988764037,
+                "minTemp": 23.8,
+                "maxTemp": 39.9,
+                "avgHumidity": 66.9438202247191,
+                "minHumidity": 27,
+                "maxHumidity": 98
+            },
+            "12m": {
+                "avgTemp": 28.85151098901101,
+                "minTemp": 19.9,
+                "maxTemp": 39.9,
+                "avgHumidity": 71.73489010989012,
+                "minHumidity": 27,
+                "maxHumidity": 99
+            }
+        }
+    },
+    "Ahmedabad": {
+        "city": "Ahmedabad",
+        "lat": 23.02372,
+        "lng": 72.57572,
+        "history": {
+            "1m": {
+                "avgTemp": 28.723214285714295,
+                "minTemp": 24.1,
+                "maxTemp": 34.4,
+                "avgHumidity": 78.96428571428571,
+                "minHumidity": 45,
+                "maxHumidity": 99
+            },
+            "3m": {
+                "avgTemp": 29.354545454545452,
+                "minTemp": 24.1,
+                "maxTemp": 42.1,
+                "avgHumidity": 76.30681818181819,
+                "minHumidity": 21,
+                "maxHumidity": 99
+            },
+            "6m": {
+                "avgTemp": 31.37022471910111,
+                "minTemp": 22,
+                "maxTemp": 44.1,
+                "avgHumidity": 56.9747191011236,
+                "minHumidity": 4,
+                "maxHumidity": 99
+            },
+            "12m": {
+                "avgTemp": 28.485027472527484,
+                "minTemp": 12.7,
+                "maxTemp": 44.1,
+                "avgHumidity": 53.994505494505496,
+                "minHumidity": 4,
+                "maxHumidity": 100
+            }
+        }
+    },
+    "Mumbai": {
+        "city": "Mumbai",
+        "lat": 19.08719,
+        "lng": 72.87539,
+        "history": {
+            "1m": {
+                "avgTemp": 26.46428571428571,
+                "minTemp": 24.7,
+                "maxTemp": 28.8,
+                "avgHumidity": 85.71428571428571,
+                "minHumidity": 70,
+                "maxHumidity": 96
+            },
+            "3m": {
+                "avgTemp": 26.95454545454546,
+                "minTemp": 24.5,
+                "maxTemp": 31.9,
+                "avgHumidity": 85.30681818181819,
+                "minHumidity": 67,
+                "maxHumidity": 100
+            },
+            "6m": {
+                "avgTemp": 28.202247191011246,
+                "minTemp": 22.7,
+                "maxTemp": 39,
+                "avgHumidity": 77.51685393258427,
+                "minHumidity": 15,
+                "maxHumidity": 100
+            },
+            "12m": {
+                "avgTemp": 27.791895604395595,
+                "minTemp": 17.9,
+                "maxTemp": 39.1,
+                "avgHumidity": 68.56456043956044,
+                "minHumidity": 11,
+                "maxHumidity": 100
+            }
+        }
+    },
+    "Bengaluru": {
+        "city": "Bengaluru",
+        "lat": 12.97556,
+        "lng": 77.59141,
+        "history": {
+            "1m": {
+                "avgTemp": 22.63214285714286,
+                "minTemp": 17.7,
+                "maxTemp": 28.3,
+                "avgHumidity": 80.44642857142857,
+                "minHumidity": 50,
+                "maxHumidity": 99
+            },
+            "3m": {
+                "avgTemp": 23.303409090909096,
+                "minTemp": 17.7,
+                "maxTemp": 30,
+                "avgHumidity": 77.97727272727273,
+                "minHumidity": 42,
+                "maxHumidity": 99
+            },
+            "6m": {
+                "avgTemp": 24.83511235955056,
+                "minTemp": 17.7,
+                "maxTemp": 36.1,
+                "avgHumidity": 69.73314606741573,
+                "minHumidity": 10,
+                "maxHumidity": 99
+            },
+            "12m": {
+                "avgTemp": 23.96497252747252,
+                "minTemp": 14.1,
+                "maxTemp": 36.1,
+                "avgHumidity": 69.06456043956044,
+                "minHumidity": 10,
+                "maxHumidity": 100
+            }
+        }
+    },
+    "Kolkata": {
+        "city": "Kolkata",
+        "lat": 22.57364,
+        "lng": 88.37049,
+        "history": {
+            "1m": {
+                "avgTemp": 28.457142857142852,
+                "minTemp": 24.5,
+                "maxTemp": 33.8,
+                "avgHumidity": 83.98214285714286,
+                "minHumidity": 63,
+                "maxHumidity": 100
+            },
+            "3m": {
+                "avgTemp": 28.749431818181822,
+                "minTemp": 24.3,
+                "maxTemp": 36.5,
+                "avgHumidity": 83.80681818181819,
+                "minHumidity": 45,
+                "maxHumidity": 100
+            },
+            "6m": {
+                "avgTemp": 29.657022471910118,
+                "minTemp": 20.3,
+                "maxTemp": 42.1,
+                "avgHumidity": 75.96629213483146,
+                "minHumidity": 13,
+                "maxHumidity": 100
+            },
+            "12m": {
+                "avgTemp": 27.143956043956038,
+                "minTemp": 12.5,
+                "maxTemp": 42.1,
+                "avgHumidity": 73.34203296703296,
+                "minHumidity": 13,
+                "maxHumidity": 100
+            }
+        }
+    },
+    "Hyderabad": {
+        "city": "Hyderabad",
+        "lat": 17.43224,
+        "lng": 78.41215,
+        "history": {
+            "1m": {
+                "avgTemp": 24.698214285714283,
+                "minTemp": 21.3,
+                "maxTemp": 29.2,
+                "avgHumidity": 79.71428571428571,
+                "minHumidity": 55,
+                "maxHumidity": 98
+            },
+            "3m": {
+                "avgTemp": 25.871590909090916,
+                "minTemp": 21.3,
+                "maxTemp": 32.6,
+                "avgHumidity": 74.6875,
+                "minHumidity": 42,
+                "maxHumidity": 100
+            },
+            "6m": {
+                "avgTemp": 27.474999999999994,
+                "minTemp": 19.5,
+                "maxTemp": 38.1,
+                "avgHumidity": 63.87921348314607,
+                "minHumidity": 13,
+                "maxHumidity": 100
+            },
+            "12m": {
+                "avgTemp": 25.85892857142856,
+                "minTemp": 12.8,
+                "maxTemp": 38.1,
+                "avgHumidity": 63.34340659340659,
+                "minHumidity": 10,
+                "maxHumidity": 100
+            }
+        }
+    },
+    "Pune": {
+        "city": "Pune",
+        "lat": 18.51225,
+        "lng": 73.84863,
+        "history": {
+            "1m": {
+                "avgTemp": 24.435714285714287,
+                "minTemp": 21.6,
+                "maxTemp": 28,
+                "avgHumidity": 83.26785714285714,
+                "minHumidity": 64,
+                "maxHumidity": 96
+            },
+            "3m": {
+                "avgTemp": 24.880113636363635,
+                "minTemp": 21.4,
+                "maxTemp": 32.2,
+                "avgHumidity": 82.64204545454545,
+                "minHumidity": 52,
+                "maxHumidity": 98
+            },
+            "6m": {
+                "avgTemp": 27.144662921348313,
+                "minTemp": 20.5,
+                "maxTemp": 41.1,
+                "avgHumidity": 67.12078651685393,
+                "minHumidity": 8,
+                "maxHumidity": 100
+            },
+            "12m": {
+                "avgTemp": 26.074038461538468,
+                "minTemp": 12.4,
+                "maxTemp": 41.1,
+                "avgHumidity": 62.58791208791209,
+                "minHumidity": 6,
+                "maxHumidity": 100
+            }
+        }
+    },
+    "Jaipur": {
+        "city": "Jaipur",
+        "lat": 26.9077,
+        "lng": 75.78223,
+        "history": {
+            "1m": {
+                "avgTemp": 27.758928571428577,
+                "minTemp": 22.5,
+                "maxTemp": 33.2,
+                "avgHumidity": 78.80357142857143,
+                "minHumidity": 49,
+                "maxHumidity": 100
+            },
+            "3m": {
+                "avgTemp": 28.730681818181825,
+                "minTemp": 22.5,
+                "maxTemp": 44,
+                "avgHumidity": 75.10795454545455,
+                "minHumidity": 12,
+                "maxHumidity": 100
+            },
+            "6m": {
+                "avgTemp": 29.74719101123595,
+                "minTemp": 16,
+                "maxTemp": 44,
+                "avgHumidity": 53.61516853932584,
+                "minHumidity": 3,
+                "maxHumidity": 100
+            },
+            "12m": {
+                "avgTemp": 25.449999999999978,
+                "minTemp": 6.3,
+                "maxTemp": 44,
+                "avgHumidity": 55.362637362637365,
+                "minHumidity": 3,
+                "maxHumidity": 100
+            }
+        }
+    },
+    "Kochi": {
+        "city": "Kochi",
+        "lat": 9.93301,
+        "lng": 76.25794,
+        "history": {
+            "1m": {
+                "avgTemp": 25.635714285714283,
+                "minTemp": 23,
+                "maxTemp": 28.9,
+                "avgHumidity": 88.03571428571429,
+                "minHumidity": 73,
+                "maxHumidity": 99
+            },
+            "3m": {
+                "avgTemp": 25.78806818181818,
+                "minTemp": 23,
+                "maxTemp": 29.2,
+                "avgHumidity": 88.01704545454545,
+                "minHumidity": 69,
+                "maxHumidity": 99
+            },
+            "6m": {
+                "avgTemp": 26.857865168539316,
+                "minTemp": 22.9,
+                "maxTemp": 33.6,
+                "avgHumidity": 84.81460674157303,
+                "minHumidity": 47,
+                "maxHumidity": 100
+            },
+            "12m": {
+                "avgTemp": 27.119642857142864,
+                "minTemp": 22.4,
+                "maxTemp": 34.8,
+                "avgHumidity": 81.37087912087912,
+                "minHumidity": 30,
+                "maxHumidity": 100
+            }
+        }
+    },
+    "Delhi": {
+        "city": "Delhi",
+        "lat": 28.7138,
+        "lng": 77.10961,
+        "history": {
+            "1m": {
+                "avgTemp": 28.639285714285716,
+                "minTemp": 23.8,
+                "maxTemp": 35,
+                "avgHumidity": 81.46428571428571,
+                "minHumidity": 50,
+                "maxHumidity": 98
+            },
+            "3m": {
+                "avgTemp": 30.085227272727266,
+                "minTemp": 23.8,
+                "maxTemp": 43,
+                "avgHumidity": 75.0965909090909,
+                "minHumidity": 17,
+                "maxHumidity": 99
+            },
+            "6m": {
+                "avgTemp": 30.306179775280913,
+                "minTemp": 15.9,
+                "maxTemp": 43.3,
+                "avgHumidity": 57.04213483146067,
+                "minHumidity": 5,
+                "maxHumidity": 99
+            },
+            "12m": {
+                "avgTemp": 25.453296703296694,
+                "minTemp": 5.7,
+                "maxTemp": 43.3,
+                "avgHumidity": 61.34478021978022,
+                "minHumidity": 5,
+                "maxHumidity": 100
+            }
+        }
+    }
+}
